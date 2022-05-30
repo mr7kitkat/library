@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body class="flex column">
+    <header class="flex">
+        <h1>My Library</h1>
+        <div class="search flex">
+            <input type="text">
+            <img src="./images/icons/search.png" alt="SearchIcon" id="icon">
+        </div>
+    </header>
+    <main class="flex column">
+        <div class="header flex">
+            <h2>Books</h2>
+            <button class="newbookBtn">New Book</button>
+        </div>
+
+        <form class="createNewbook">
+            <div class="header flex">
+                <h2>New Book</h2>
+                <img src="./images/icons/close.png" class="form-close" alt="">
+            </div>
+
+            <div class="book-title">
+                <label for="btitle">Title</label>
+                <input type="text" id="btitle" name="title" class="inputitem" required>    
+            </div>
+            
+            <div class="book-description">
+                <label for="bdescription">Description</label>
+                <textarea id="bdescription" name="description" class="inputitem" cols="30" rows="5" required></textarea>    
+            </div>
+            
+            <div class="noOfPages">
+                <label for="pageCount">Pages:</label>
+                <input type="number" id="pageCount" name="pages" class="inputitem" required>
+            </div>
+
+            <div class="status">
+                <label for="readStatus">Status:</label>
+                <select id="readStatus" class="inputitem" name="status" required>
+                    <option value="yes">Read</option>
+                    <option value="no" selected>Not Read Yet</option>
+                </select>
+            </div>
+
+            <button class="inputitem newbookBtn">Save</button>
+        </form>
+
+        <div class="booklist">
+            
+
+        </div>
+    </main>
+    <footer class="flex">
+        <a href="">&copy;mr7kitkat</a>
+    </footer>
+
+    <script src="./scripts/script.js"></script>
+</body>
+</html>
