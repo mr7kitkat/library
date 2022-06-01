@@ -8,7 +8,6 @@
     <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/main.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body class="flex column">
     <header class="flex">
@@ -21,7 +20,7 @@
     <main class="flex column">
         <div class="header flex">
             <h2>Books</h2>
-            <button class="newbookBtn">New Book</button>
+            <button id="addNewBook" class="newbookBtn">New Book</button>
         </div>
 
         <form class="createNewbook">
@@ -41,18 +40,17 @@
             </div>
             
             <div class="noOfPages">
-                <label for="pageCount">Pages:</label>
-                <input type="number" id="pageCount" name="pages" class="inputitem" required>
+                <label for="pagesCount">Pages:</label>
+                <input type="number" id="pagesCount" name="pages" class="inputitem" required>
             </div>
 
             <div class="status">
                 <label for="readStatus">Status:</label>
                 <select id="readStatus" class="inputitem" name="status" required>
-                    <option value="yes">Read</option>
-                    <option value="no" selected>Not Read Yet</option>
+                    <option value="Read">Read</option>
+                    <option value="Not read yet!" selected>Not Read Yet</option>
                 </select>
             </div>
-
             <button class="inputitem newbookBtn">Save</button>
         </form>
 

@@ -1,65 +1,106 @@
-const LIBRARY = [];
-
-// function BOOK(title, description, pages, status) {
-//     const obj = {};
-//     this.title = title
-//     this.description = description
-//     this.pages = pages
-//     this.status = status
-
-//     return obj;
-// }
-
-function generateDom(arr) {
-    return arr.map(item => `
+const LIBRARY = [
+    `
         <div class="book">
-                <h3>${item.title}</h3>
-                <div class="details flex">
-                    <p class="pages">${item.pages} pages</p>
+        <h3>the ramayana</h3>
+        <div class="details flex">
+            <p class="pages">1000 pages</p>
 
-                    <div class="actions">
-                        <img src="./images/icons/pencil.png" alt="">
-                        <img src="./images/icons/close.png" alt="">
-                    </div>
-                </div>
-
-                <p class="description">${item.description}</p>
+            <div class="actions" data-value="0">
+                <img src="./images/icons/pencil.png" class="edit" alt="">
+                <img src="./images/icons/close.png" class="delete" alt="">
             </div>
-        `).join("");
+        </div>
+
+        <p class="description">A tale of Lord ram's life</p>
+        </div>
+    `,
+    `
+        <div class="book">
+        <h3>Iron man</h3>
+        <div class="details flex">
+            <p class="pages">500 pages</p>
+
+            <div class="actions" data-value="1">
+                <img src="./images/icons/pencil.png" class="edit" alt="">
+                <img src="./images/icons/close.png" class="delete" alt="">
+            </div>
+        </div>
+
+        <p class="description">A superhero story</p>
+        </div>
+    `
+];
+
+function BOOK(title, pages, description, readStatus, db) {
+    this.title = title;
+    this.pages = pages;
+    this.description = description;
+    this.readStatus = readStatus;
+    this.db = db;
+    this.addBook();
+}
+
+BOOK.prototype.addBook = function() {
+    const {title, pages, description, readStatus, db} = this;
+
+    const tag = `
+    <div class="book">
+        <h3>${title}</h3>
+        <div class="details flex">
+            <p class="pages">${pages} pages</p>
+
+            <div class="actions" data-value="${db.length}">
+                <img src="./images/icons/pencil.png" class="edit" alt="">
+                <img src="./images/icons/close.png" class="delete" alt="">
+            </div>
+        </div>
+
+        <p class="description">${description}</p>
+    </div>
+    `
+    db.push(tag);
+}
+
+BOOK.prototype.render = function(parentElem) {
+    const tags = this.db.map(item => item).join("");
+    parentElem.innerHTML = tags;
 }
 
 
-function renderArray(domobj, text) {
-    domobj.innerHTML = text;
+
+
+// Actual implimentation
+const form = document.querySelector("form.createNewbook");
+const newBookCreateBtn = document.querySelector("#addNewBook");
+const bookShelf = document.querySelector(".booklist");
+// FORM CONTROLS
+
+const formClose = form.querySelector("img.form-close");
+
+// Buttons functions
+newBookCreateBtn.addEventListener("click", () => {
+    form.classList.toggle("display");
+});
+
+formClose.addEventListener("click", closeForm);
+function closeForm() {
+    form.classList.remove("display");
+    form.reset();
 }
 
-$(document).ready(function() {
-    $(".newbookBtn").click(function() {
-        $("main form").toggleClass("display");
-    });
 
-    $(".form-close").click(function() {
-        $("main form").removeClass("display");
-        $("form").trigger("reset");
-    });
+// FORM HANDLING
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-    $("form").on('submit', function(e){
-        e.preventDefault();
-        
-        const obj = {};
-        [...this.elements].forEach(element => {
-            if(element.localName !== "button") {
-                obj[element.name] = element.value;
-            }
-        });
-        
-        $(this).trigger("reset");
-        obj.status = obj.status === "yes" ? true : false;
+    const title = form.querySelector("#btitle").value;
+    const description = form.querySelector("#bdescription").value;
+    const pages = form.querySelector("#pagesCount").value;
+    const readStatus = form.querySelector("#readStatus").value;
+    const saveBtn = form.querySelector("button");
 
-        LIBRARY.push(obj);
-        
-        const library = generateDom(LIBRARY);
-        renderArray(document.querySelector(".booklist"),library);
-    })
+    const newbook = new BOOK(title, pages, description, readStatus, LIBRARY);
+    newbook.render(bookShelf);
+    closeForm();
 })
 
