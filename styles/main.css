@@ -189,3 +189,10 @@ form> div.header img {
   height: 30px;
   max-width: 100%;
 }
+
+
+@media screen and (max-width: 600px) {
+    header.flex {
+      flex-direction: column;
+    }
+}
